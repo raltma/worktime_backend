@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\DepartmentSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ClassificationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UserSeeder::class, DepartmentSeeder::class]);
+        $this->call([UserSeeder::class, DepartmentSeeder::class, ClassificationSeeder::class]);
     }
 }

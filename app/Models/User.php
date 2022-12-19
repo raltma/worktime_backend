@@ -29,6 +29,21 @@ class User extends Authenticatable
         ->withDefault();
     }
 
+    public function absentReports(){
+        return $this
+        ->hasMany(AbsentReport::class);
+    }
+
+    public function hourReports(){
+        return $this
+        ->hasMany(hourReport::class);
+    }
+
+    public function piecesReports(){
+        return $this
+        ->hasMany(PieceReport::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
