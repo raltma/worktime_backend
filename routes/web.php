@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function(){
+    return response()->json([
+        'message' => 'You have to login first by making post request to /api/auth/login with email and password'
+    ],401);
+})->name('login');

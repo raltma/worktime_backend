@@ -18,10 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
     ];
+    
+    
+    public function department(){
+        return $this
+        ->belongsTo(Department::class, "bs_id","bs_department_id")
+        ->withDefault();
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +47,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
+            $table->string('bs_id')->unique;
             $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
+            $table->string('department');
             $table->timestamps();
         });
+
+        /* Schema::table('users', function (Blueprint $table) {
+            $table->foreign('bs_department_id')->references('bs_id')->on('departments');
+        }); */
     }
 
     /**
@@ -32,6 +33,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_access_tokens');
+        /* Schema::table('users', function(Blueprint $table){
+            $table->dropForeign(['bs_department_id']);
+        }); */
+        Schema::dropIfExists('departments');
     }
 };

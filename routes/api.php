@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BoilerController;
+use App\Http\Controllers\Api\DoorController;
+use App\Http\Controllers\Api\LightController;
+use App\Http\Controllers\Api\MatController;
+use App\Http\Controllers\Api\LightLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get("/lightLog", [LightLogController::class, 'show']);
+
+
+Route::prefix("/auth")->group(function(){
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::middleware('auth:sanctum')->post('/checkToken', [AuthController::class, 'checkToken']);
 });
+
