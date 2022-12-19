@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\BoilerController;
-use App\Http\Controllers\Api\DoorController;
-use App\Http\Controllers\Api\LightController;
-use App\Http\Controllers\Api\MatController;
-use App\Http\Controllers\Api\LightLogController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +24,7 @@ Route::prefix("/auth")->group(function(){
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('/checkToken', [AuthController::class, 'checkToken']);
 });
+
+Route::middleware('auth:sanctum')->get('/users',[UserController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/departments',[DepartmentController::class, 'index']);
 

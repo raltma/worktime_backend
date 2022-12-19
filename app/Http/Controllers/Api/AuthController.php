@@ -64,7 +64,7 @@ class AuthController extends Controller
                 'error' => $validateUser->errors()
             ], 401);
 
-            $user = User::where('username', $request->email)->first();
+            $user = User::where('username', $request->username)->first();
 
             return response()->json([
                 'status' => true,

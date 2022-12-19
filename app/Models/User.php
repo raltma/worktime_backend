@@ -25,7 +25,7 @@ class User extends Authenticatable
     
     public function department(){
         return $this
-        ->belongsTo(Department::class, "bs_id","bs_department_id")
+        ->belongsTo(Department::class,"bs_department_id", "bs_id")
         ->withDefault();
     }
 
