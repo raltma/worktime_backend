@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date("date_selected");
             $table->integer("shift");
             $table->integer("hours");
-            $table->boolean("overtime")->default();
+            $table->boolean("overtime")->default(false);
             $table->integer("overtime_hours")->default(0);
             $table->timestamps();
             $table->foreignId("user_id")->constrained();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HourReport;
 use App\Http\Resources\HourReportResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HourReportController extends Controller
 {
@@ -20,16 +21,6 @@ class HourReportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,6 +28,20 @@ class HourReportController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validate = Validator::make($request->all(),
+            [
+                'date_selected' => 'required|date',
+                'user_id' => 'required',
+                'hours' => 'required|numeric',
+                'shift' => 'required'
+            ]);
+
+            if($validate->fails()) return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'error' => $validate->errors()
+            ], 400);
         $HourReport = HourReport::create($request->all());
         
         return new HourReportResource($HourReport);
@@ -48,20 +53,9 @@ class HourReportController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(HourReport $report)
+    public function show(Request $request, $reportId)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(HourReport $report)
-    {
-        //
+        return HourReport::find($reportId);
     }
 
     /**
@@ -71,11 +65,12 @@ class HourReportController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HourReport $report)
+    public function update(Request $request, $id)
     {
-        $report->update($request->all());
+        HourReport::where('id',$id)->update($request->all());
+        $report = HourReport::find($id);
         
-        return new HourReportResource($report);
+        return $report;
     }
 
     /**
