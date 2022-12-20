@@ -81,8 +81,9 @@ class AuthController extends Controller
 
      public function checkToken(Request $request){
         try {
+            $user =  $request->user(); 
             return response()->json([
-                'message' => 'The token is valid'
+                'user' => $user
             ], 200);
             
         } catch (\Throwable $th) {

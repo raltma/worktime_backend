@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\PieceReport;
 use Illuminate\Http\Request;
 use App\Http\Resources\PieceReportResource;
+use App\Models\PieceClassification;
+use Illuminate\Support\Facades\Validator;
 
 class PieceReportController extends Controller
 {
-        /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,9 +29,37 @@ class PieceReportController extends Controller
      */
     public function store(Request $request)
     {
-        $PieceReport = PieceReport::create($request->all());
+        $validate = Validator::make($request->all(),
+            [
+                'date_selected' => 'required|date',
+                'user_id' => 'required',
+                'workplace' => 'required|numeric',
+                'shift' => 'required',
+                'classification_id' => 'required',
+                'classification_count' => 'required'
+            ]);
+
+            if($validate->fails()) return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'error' => $validate->errors()
+            ], 400);
+        $report = new PieceReport;
+        $report->date_selected = $request->date_selected;
+        $report->shift = $request->shift;
+        $report->workplace = $request->workplace;
+        $report->user_id = $request->user_id;
+        $report->save();
+        for($i = 0; $i < sizeof($request->classification_id); $i++){
+            $c = new PieceClassification();
+            $c->classification_id = $request->classification_id[$i];
+            $c->quantity = $request->classification_count[$i];
+            $c->piece_report_id = $report->id;
+            $c->save();
+        }
+
         
-        return new PieceReportResource($PieceReport);
+        return $report;
     }
 
     /**

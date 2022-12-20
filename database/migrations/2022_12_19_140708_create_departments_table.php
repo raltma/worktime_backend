@@ -21,9 +21,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        /* Schema::table('users', function (Blueprint $table) {
-            $table->foreign('bs_department_id')->references('bs_id')->on('departments');
-        }); */
+         Schema::table('users', function (Blueprint $table) {
+            $table->foreign('admin_department')->references('id')->on('departments');
+        });
     }
 
     /**
@@ -36,6 +36,9 @@ return new class extends Migration
         /* Schema::table('users', function(Blueprint $table){
             $table->dropForeign(['bs_department_id']);
         }); */
+        Schema::table('users', function(Blueprint $table){
+            $table->dropForeign('users_admin_department_foreign');
+        });
         Schema::dropIfExists('departments');
     }
 };

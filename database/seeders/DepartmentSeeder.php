@@ -16,6 +16,11 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
+            "bs_id"=> "0",
+            "name"=>"Kõik",
+            "Department"=>"Kõik"
+        ]);
+        DB::table('departments')->insert([
             "bs_id"=> "2",
             "name"=>"Läinud inimesed",
             "Department"=>"Läinud inimesed"

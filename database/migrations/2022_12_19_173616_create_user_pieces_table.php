@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("shift");
             $table->string("workplace");
             $table->foreignId("user_id")->constrained;
+            $table->timestamps();
         });
     }
 

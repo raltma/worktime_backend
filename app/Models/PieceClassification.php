@@ -9,6 +9,8 @@ class PieceClassification extends Model
 {
     use HasFactory;
 
+    protected $with = ['classification'];
+
     public function classification(){
         return $this
         ->belongsTo(Classification::class)

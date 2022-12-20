@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HourReportController;
 use App\Http\Controllers\PieceReportController;
 use App\Http\Controllers\UserController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +29,8 @@ Route::prefix("/auth")->group(function(){
 
 Route::middleware('auth:sanctum')->get('/users',[UserController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/departments',[DepartmentController::class, 'index']);
+
+Route::middleware('auth:sanctum')->apiResource('classification', ClassificationController::class);
 
 Route::middleware('auth:sanctum')->apiResource('hourReport', HourReportController::class);
 Route::middleware('auth:sanctum')->apiResource('pieceReport', PieceReportController::class);

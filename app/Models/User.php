@@ -21,11 +21,19 @@ class User extends Authenticatable
         'username',
         'password',
     ];
+
+    protected $with = ['department','adminDepartment'];
     
     
     public function department(){
         return $this
         ->belongsTo(Department::class,"bs_department_id", "bs_id")
+        ->withDefault();
+    }
+
+    public function adminDepartment(){
+        return $this
+        ->belongsTo(Department::class,"admin_department", "id")
         ->withDefault();
     }
 
@@ -52,6 +60,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'bs_department_id',
+        'admin_department',
+        'email_verified_at'
     ];
 
     /**

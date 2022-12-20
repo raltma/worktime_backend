@@ -15,7 +15,18 @@ class ClassificationSeeder extends Seeder
      */
     public function run()
     {
-        $classifications = ['Test1','Test2','Test3'];
+        $classifications = [
+            '006TITÕMBL',
+            '066Tittek õmb 2xTit',
+            '066TÕMB1,4-1,55',
+            '066Teki õmb 2xS',
+            '067TÕMB2,0-2,18',
+            '067Teki õmb 2xD',
+            '068TÕMB2,18-2,4',
+            '068Teki õmb 2xK',
+            '069Tõmbeluku Õmb',
+            '069Tõmbluku Õmb2x'
+        ];
         foreach($classifications as $classification){
             DB::table('classifications')->insert([
                 "name"=>$classification

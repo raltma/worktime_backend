@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
             'email'=>"admin@admin.ee",
             'taavi_code'=>"0000",
             'bs_department_id'=>"3",
-            'password'=> Hash::make("Nimda2102!")
+            'password'=> Hash::make("Nimda2102!"),
+            'admin'=> true,
+            'admin_department'=>1
         ]);
     }
 }

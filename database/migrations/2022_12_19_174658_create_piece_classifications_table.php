@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer("quantity");
             $table->foreignId("piece_report_id")->constrained();
+            $table->timestamps();
         });
     }
 
