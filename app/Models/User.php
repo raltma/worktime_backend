@@ -62,7 +62,9 @@ class User extends Authenticatable
         'remember_token',
         'bs_department_id',
         'admin_department',
-        'email_verified_at'
+        'email_verified_at',
+        'created_at',
+        'updated_at'
     ];
 
     /**

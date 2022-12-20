@@ -9,6 +9,7 @@ class PieceReport extends Model
 {
     use HasFactory;
 
+    protected $hidden = [ 'created_at', 'updated_at', 'user_id'];
     protected $with = ['classifications', 'user'];
     public function classifications(){
         return $this->hasMany(PieceClassification::class,"piece_report_id");
