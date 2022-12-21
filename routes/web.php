@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
-
 Route::get('/login', function(){
-    return response()->json([
-        'message' => 'You have to login first by making post request to /api/auth/login with email and password'
-    ],401);
+    return view('login',['title'=>'Sisse logimine']);
 })->name('login');
+Route::post('/login', [AdminAuthController::class,'authenticate']);
+Route::get('/logout', [AdminAuthController::class,'logout']);
+Route::middleware('auth')->get('/users', function(){
+    return view('users',['title'=>'Kasutajad']);
+});
