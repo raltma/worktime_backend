@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("hours");
             $table->boolean("overtime")->default(false);
             $table->integer("overtime_hours")->default(0);
+            $table->boolean("confirmed")->default(false);
             $table->foreignId("user_id")->constrained();
             $table->timestamps();
         });

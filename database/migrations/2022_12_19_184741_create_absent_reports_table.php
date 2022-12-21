@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("reason");
             $table->string("filepath")->nullable();
             $table->foreignId("user_id")->constrained;
+            $table->boolean("confirmed")->default(false);
             $table->timestamps();
         });
     }

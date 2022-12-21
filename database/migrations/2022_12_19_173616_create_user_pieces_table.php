@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date("date_selected");
             $table->integer("shift");
             $table->string("workplace");
+            $table->boolean("confirmed")->default(false);
             $table->foreignId("user_id")->constrained;
             $table->timestamps();
         });

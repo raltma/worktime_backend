@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsentReportController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DepartmentController;
@@ -34,4 +35,5 @@ Route::middleware('auth:sanctum')->apiResource('classification', ClassificationC
 
 Route::middleware('auth:sanctum')->apiResource('hourReport', HourReportController::class);
 Route::middleware('auth:sanctum')->apiResource('pieceReport', PieceReportController::class);
+Route::middleware('auth:sanctum')->apiResource('absentReport', AbsentReportController::class);
 
