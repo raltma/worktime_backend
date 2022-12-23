@@ -1,2 +1,3 @@
 8h - setup 1
 4h - setup 2
+3h - setup 3

@@ -7,7 +7,7 @@
             <a 
             class="@if(request()->route()->uri==='users') selected @endif" 
             href="{{url('users')}}"
-            >Test</a>
+            >Kasutajad</a>
             <a href="{{url('logout')}}">Logi välja</a>
         </div>
     @endauth

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminAuthController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ Route::get('/login', function(){
 })->name('login');
 Route::post('/login', [AdminAuthController::class,'authenticate']);
 Route::get('/logout', [AdminAuthController::class,'logout']);
-Route::middleware('auth')->get('/users', function(){
-    return view('users',['title'=>'Kasutajad']);
+Route::middleware(['auth','auth.admin'])->get('/users', function(){
+    $users = User::all();
+    return view('users',['title'=>'Kasutajad', 'users'=>$users]);
 });

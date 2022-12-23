@@ -85,3 +85,8 @@
 .errorFiller{
     height: 2.65rem;
 }
+.title{
+    width: fit-content;
+    margin-left: auto;
+    margin-right:auto;
+}
