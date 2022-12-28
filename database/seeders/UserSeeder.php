@@ -24,8 +24,11 @@ class UserSeeder extends Seeder
             'taavi_code'=>"0000",
             'bs_department_id'=>"3",
             'password'=> Hash::make("Nimda2102!"),
-            'admin'=> true,
-            'admin_department'=>1
+            'admin'=> true
+        ]);
+        DB::table('admin_departments')->insert([
+            'user_id' => 1,
+            'department_id' => 1
         ]);
     }
 }

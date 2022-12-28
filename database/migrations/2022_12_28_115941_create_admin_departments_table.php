@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('admin_departments', function (Blueprint $table) {
             $table->id();
-            $table->string('bs_id')->unique;
-            $table->string('name');
-            $table->string('department');
             $table->timestamps();
+            $table->foreignId("user_id");
+            $table->foreignId("department_id");
         });
-   }
+    }
 
     /**
      * Reverse the migrations.
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('admin_departments');
     }
 };

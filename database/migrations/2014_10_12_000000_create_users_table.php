@@ -24,12 +24,10 @@ return new class extends Migration
             $table->string('bs_department_id')->nullable(); //department id that is coming from biostar
             $table->string('email');
             $table->boolean('admin')->default(false);
-            $table->unsignedBigInteger('admin_department')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->index('admin_department');
         });
     }
 

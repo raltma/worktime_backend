@@ -22,7 +22,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    protected $with = ['department','adminDepartment'];
+    protected $with = ['department','adminDepartments'];
     
     
     public function department(){
@@ -31,10 +31,9 @@ class User extends Authenticatable
         ->withDefault();
     }
 
-    public function adminDepartment(){
+    public function adminDepartments(){
         return $this
-        ->belongsTo(Department::class,"admin_department", "id")
-        ->withDefault();
+        ->belongsToMany(Department::class,"admin_departments");
     }
 
     public function absentReports(){
