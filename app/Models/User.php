@@ -24,7 +24,6 @@ class User extends Authenticatable
 
     protected $with = ['department','adminDepartments'];
     
-    
     public function department(){
         return $this
         ->belongsTo(Department::class,"bs_department_id", "bs_id")

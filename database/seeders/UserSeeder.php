@@ -30,5 +30,21 @@ class UserSeeder extends Seeder
             'user_id' => 1,
             'department_id' => 1
         ]);
+        DB::table('admin_departments')->insert([
+            'user_id' => 1,
+            'department_id' => 2
+        ]);
+
+        DB::table('users')->insert([
+            'bs_id'=>"1",
+            'fingerprint_id'=>"1",
+            'username'=> "mats",
+            'name'=>"madis",
+            'email'=>"admin@admin.ee",
+            'taavi_code'=>"0000",
+            'bs_department_id'=>"3",
+            'password'=> Hash::make("mats"),
+            'admin'=> false
+        ]);
     }
 }

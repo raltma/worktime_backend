@@ -15,4 +15,9 @@ class Department extends Model
     {
         return $this->hasMany(User::class, "bs_department_id", "bs_id");
     }
+
+    public function adminUsers(){
+        return $this
+        ->belongsToMany(USER::class,"admin_departments");
+    }
 }

@@ -14,11 +14,14 @@ class AdminAuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt($credentials)) {
             if(auth()->user()->admin === 1){
                 $request->session()->regenerate();
-                return redirect('/users');            }
+                return redirect('/users');
+            }
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
             return back()->withErrors([
                 'message' => 'Kasutajal pole admini õigust',
             ])->onlyInput('message');
