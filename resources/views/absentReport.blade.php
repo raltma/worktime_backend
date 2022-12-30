@@ -30,22 +30,17 @@
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
             {title:"Tunnid", field:"hours", headerFilter:true},
+            {title:"Põhjus", field:"reason", headerFilter:true},
+            {title:"Manus", field:"filepath",  headerFilter:true, 
+                formatter:"link", formatterParams:{
+                target:"_blank",
+            }},
             {title:"Kinnitatud", field:"confirmed", formatter:"tickCross",width:175, headerFilter:true}
         ]
     })
 
     table.on("rowClick", function(e, row){
-        console.log(adminSelect.getSelected());
         let rowData = row.getData()
-        document.getElementById('selectedUser').value = rowData.id;
-        document.getElementById('username').value = rowData.username;
-        document.getElementById('saveButton').hidden = false;
-        document.getElementById('selectedUserText').innerHTML = `Valitud on kasutaja <i><b>${rowData.name}<b></i>`
-        document.getElementById('admin').checked = rowData.admin === 1
-        adminDepartmentContainer.hidden = true
-        if(rowData.admin === 1) adminDepartmentContainer.hidden = false 
-        let adminDepartmentsSelect = document.getElementById('adminDepartments');
-        adminSelect.setSelected(rowData.admin_departments.map((ad)=>String(ad.id)))
     });
 </script>
 @endsection
