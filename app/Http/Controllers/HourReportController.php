@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Validator;
 
 class HourReportController extends Controller
 {
+    public function confirm(Request $request){
+        $validate = Validator::make($request->all(),
+              [
+                  'reportId' => 'required',
+              ]);
+              if($validate->fails()) return response()->json([
+                  'status' => false,
+                  'message' => 'validation error',
+                  'error' => $validate->errors()
+              ], 400);
+              $report = HourReport::find($request->reportId);
+              $report->confirmed = 1;
+              $report->save();
+              return back()->withErrors(['message'=>"Aruanne kinnitatud"]);
+      }
     /**
      * Display a listing of the resource.
      *

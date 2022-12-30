@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\admin\AdminAuthController;
+use App\Http\Controllers\AbsentReportController;
+use App\Http\Controllers\HourReportController;
+use App\Http\Controllers\PieceReportController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\HourReport;
+use App\Models\PieceReport;
 use App\Models\AbsentReport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Builder;
@@ -54,7 +58,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
         }
         return view('hourReport',['title'=>'Tunni aruanded', 'reports'=>$reports]);
     });
-    //Route::post('/update', [UserController::class,'updateUser']);
+    Route::post('/confirm', [HourReportController::class,'confirm']);
 });
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(function(){
@@ -73,5 +77,28 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
         }
         return view('absentReport',['title'=>'Puudumiste aruanded', 'reports'=>$reports]);
     });
-    //Route::post('/update', [UserController::class,'updateUser']);
+    Route::post('/confirm', [AbsentReportController::class,'confirm']);
+});
+
+Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(function(){
+    Route::get('/', function(){
+        $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
+        if(in_array("0",$adminDepartments)){
+            $reports = PieceReport::all();
+        }else{
+            $reports = PieceReport::whereHas('user', function(Builder $query){
+                $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
+                $query->whereIn('bs_id', $adminDepartments);
+            })
+            ->orderByDesc('confirmed')
+            ->orderByDesc('date_selected')
+            ->get();
+        }
+        return view('piecesReport',['title'=>'Tükkide aruanded', 'reports'=>$reports]);
+    });
+    Route::post('/confirm', [PieceReportController::class,'confirm']);
+});
+
+Route::get("/api/absentReasons", function(){
+    return response()->file(resource_path('json/absentReasons.json'));
 });

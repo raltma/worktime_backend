@@ -14,6 +14,22 @@ class AbsentReportController extends Controller
        *
        * @return \Illuminate\Http\Response
        */
+
+      public function confirm(Request $request){
+        $validate = Validator::make($request->all(),
+              [
+                  'reportId' => 'required',
+              ]);
+              if($validate->fails()) return response()->json([
+                  'status' => false,
+                  'message' => 'validation error',
+                  'error' => $validate->errors()
+              ], 400);
+              $report = AbsentReport::find($request->reportId);
+              $report->confirmed = 1;
+              $report->save();
+              return back()->withErrors(['message'=>"Aruanne kinnitatud"]);
+      }
       public function index()
       {
           $reports = AbsentReport::all();

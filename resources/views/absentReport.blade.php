@@ -20,22 +20,39 @@
     @endif
 <div id="table"></div>
 
-<script type="text/javascript">
+<script type="module">
+    let absentReasons = {{Js::from(json_decode(File::get(resource_path("json/absentReasons.json"))))}}
+    absentReasons = absentReasons.map((d)=>d.items).flat(1)
     let tableData = {{ Js::from($reports) }};
     let table = new Tabulator("#table", {
         data: tableData,
         layout: "fitColumns",
+        initialHeaderFilter:[{field:"confirmed", value:false}],
         columns: [
             {title:"Esitaja nimi", field:"user.name", width:150, headerFilter:true},
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
             {title:"Tunnid", field:"hours", headerFilter:true},
-            {title:"Põhjus", field:"reason", headerFilter:true},
+            {title:"Kood/Põhjus", field:"reason", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
+                if(cell.getRow().getData().overtime === 1){
+                    return cell.getValue();
+                }
+                return cell.getValue() + " / " + absentReasons.find((x)=>x.code === cell.getValue()).name //return the contents of the cell;
+            }},
             {title:"Manus", field:"filepath",  headerFilter:true, 
                 formatter:"link", formatterParams:{
                 target:"_blank",
             }},
-            {title:"Kinnitatud", field:"confirmed", formatter:"tickCross",width:175, headerFilter:true}
+            {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
+                if(cell.getValue() === 0){
+                    return `<form autocomplete="off" action="{{url('absentReport/confirm')}}" method="post">
+                    @csrf
+                    <input type="hidden" name="reportId" value="${cell.getRow().getData().id}">
+                    <input type="submit" value="Kinnita"/>
+                    </form>`;
+                }
+                return "Kinnitatud";
+            }}
         ]
     })
 

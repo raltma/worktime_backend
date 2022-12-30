@@ -30,16 +30,16 @@
             {title:"Esitaja nimi", field:"user.name", width:150, headerFilter:true},
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
-            {title:"Tunnid", field:"hours", headerFilter:true},
-            {title:"Ületunnid", field:"overtime_hours", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
-                if(cell.getRow().getData().overtime === 1){
-                    return cell.getValue();
-                }
-                return "-" //return the contents of the cell;
+            {title:"Töökoht", field:"workplace", headerFilter:true},
+            {title:"Tükid/Liigitused", variableHeight:true, formatter:function(cell, formatterParams, onRendered){
+                cell.getElement().style.whiteSpace = "pre-wrap";
+                return cell.getRow().getData().classifications
+                .map((c)=> c.quantity +"tk" + "\t" + c.classification.name)
+                .join("\n");
             }},
             {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
-                    return `<form autocomplete="off" action="{{url('hourReport/confirm')}}" method="post">
+                    return `<form autocomplete="off" action="{{url('piecesReport/confirm')}}" method="post">
                     @csrf
                     <input type="hidden" name="reportId" value="${cell.getRow().getData().id}">
                     <input type="submit" value="Kinnita"/>
