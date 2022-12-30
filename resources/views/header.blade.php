@@ -5,9 +5,13 @@
     @auth
         <div class="links">
             <a 
-            class="@if(request()->route()->uri==='users') selected @endif" 
-            href="{{url('users')}}"
+            class="@if(request()->route()->uri==='user') selected @endif" 
+            href="{{url('user')}}"
             >Kasutajad</a>
+            <a 
+            class="@if(request()->route()->uri==='hourReport') selected @endif" 
+            href="{{url('hourReport')}}"
+            >Tundide aruanded</a>
             <a href="{{url('logout')}}">Logi välja</a>
         </div>
     @endauth

@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PieceClassification;
 use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HourReport extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'date_selected',
@@ -20,6 +22,7 @@ class HourReport extends Model
         'overtime_hours'
     ];
     
+    protected $with = ['user'];
     public function user(){
         return $this
         ->belongsTo(User::class)

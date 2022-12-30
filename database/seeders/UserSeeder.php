@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'name'=>"madis",
             'email'=>"admin@admin.ee",
             'taavi_code'=>"0000",
-            'bs_department_id'=>"3",
+            'bs_department_id'=>"2",
             'password'=> Hash::make("mats"),
             'admin'=> false
         ]);

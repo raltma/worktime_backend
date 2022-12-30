@@ -18,7 +18,7 @@
     @else
         <div class="errorFiller"></div>
     @endif
-<form autocomplete="off" action="{{url('update_user')}}" method="post">
+<form autocomplete="off" action="{{url('user/update')}}" method="post">
     @csrf
     <div id="selectedUserText"></div>
     <input id="selectedUser" type="hidden" name="id" value="1">

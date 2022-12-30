@@ -17,7 +17,7 @@ class AdminAuthController extends Controller
         if (Auth::attempt($credentials)) {
             if(auth()->user()->admin === 1){
                 $request->session()->regenerate();
-                return redirect('/users');
+                return redirect('/user');
             }
             Auth::logout();
             $request->session()->invalidate();

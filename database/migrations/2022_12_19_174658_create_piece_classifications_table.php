@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer("quantity");
             $table->foreignId("piece_report_id")->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
