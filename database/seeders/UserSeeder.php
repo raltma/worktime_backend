@@ -30,12 +30,12 @@ class UserSeeder extends Seeder
             'user_id' => 1,
             'department_id' => 1
         ]);
-        DB::table('admin_departments')->insert([
+        /* DB::table('admin_departments')->insert([
             'user_id' => 1,
             'department_id' => 2
-        ]);
+        ]); */
 
-        DB::table('users')->insert([
+        /* DB::table('users')->insert([
             'bs_id'=>"1",
             'fingerprint_id'=>"1",
             'username'=> "mats",
@@ -45,6 +45,6 @@ class UserSeeder extends Seeder
             'bs_department_id'=>"2",
             'password'=> Hash::make("mats"),
             'admin'=> false
-        ]);
+        ]); */
     }
 }
