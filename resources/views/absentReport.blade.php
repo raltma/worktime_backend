@@ -37,7 +37,9 @@
                 if(cell.getRow().getData().overtime === 1){
                     return cell.getValue();
                 }
-                return cell.getValue() + " / " + absentReasons.find((x)=>x.code === cell.getValue()).name //return the contents of the cell;
+                if(cell.getValue() === "null") return "";
+                let name = absentReasons.find((x)=>x.code === cell.getValue()).name
+                return cell.getValue() + " / " + name //return the contents of the cell;
             }},
             {title:"Manus", field:"filepath",  headerFilter:true, 
                 formatter:"link", formatterParams:{
@@ -52,7 +54,9 @@
                     </form>`;
                 }
                 return "Kinnitatud";
-            }}
+            }},
+            {title:"Kinnitaja", field:"confirmer.name", headerFilter:true},
+            {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true},
         ]
     })
 

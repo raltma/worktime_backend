@@ -22,6 +22,8 @@ class PieceReportController extends Controller
               ], 400);
               $report = PieceReport::find($request->reportId);
               $report->confirmed = 1;
+              $report->confirmer_id = $request->user()->id;
+              $report->confirmed_at = now();
               $report->save();
               return back()->withErrors(['message'=>"Aruanne kinnitatud"]);
       }
@@ -69,6 +71,7 @@ class PieceReportController extends Controller
             $c = new PieceClassification();
             $c->classification_id = $request->classification_id[$i];
             $c->quantity = $request->classification_count[$i];
+            $c->overtime = $request->classification_overtime[$i];
             $c->piece_report_id = $report->id;
             $c->save();
         }

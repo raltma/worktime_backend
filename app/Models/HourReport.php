@@ -22,10 +22,15 @@ class HourReport extends Model
         'overtime_hours'
     ];
     
-    protected $with = ['user'];
+    protected $with = ['user', 'confirmer'];
     public function user(){
         return $this
         ->belongsTo(User::class)
+        ->withDefault();
+    }
+    public function confirmer(){
+        return $this
+        ->belongsTo(User::class,"confirmer_id","id")
         ->withDefault();
     }
 }

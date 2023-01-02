@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'taavi_code'=>"0000",
             'bs_department_id'=>"2",
             'password'=> Hash::make("mats"),
-            'admin'=> false
+            'admin'=> true
         ]); */
     }
 }

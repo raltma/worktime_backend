@@ -12,11 +12,17 @@ class AbsentReport extends Model
     use SoftDeletes;
 
     protected $hidden = [ 'created_at', 'updated_at', 'user_id'];
-    protected $with = ['user'];
+    protected $with = ['user', 'confirmer'];
 
     public function user(){
         return $this
         ->belongsTo(User::class)
+        ->withDefault();
+    }
+
+    public function confirmer(){
+        return $this
+        ->belongsTo(User::class,"confirmer_id","id")
         ->withDefault();
     }
 }

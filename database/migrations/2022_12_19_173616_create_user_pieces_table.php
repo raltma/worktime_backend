@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string("workplace");
             $table->boolean("confirmed")->default(false);
             $table->foreignId("user_id")->constrained;
+            $table->unsignedBigInteger('confirmer_id')->nullable();
+            $table->timestamp("confirmed_at")->nullable();
+            $table->foreign("confirmer_id")
+                ->references("id")
+                ->on("users");
             $table->timestamps();
             $table->softDeletes();
         });

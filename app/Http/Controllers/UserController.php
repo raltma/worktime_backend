@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     function index(){
-        $user = User::all();
+        $user = User::where('bs_department_id', '!=','2')->get();
         return response()->json($user);
     }
 

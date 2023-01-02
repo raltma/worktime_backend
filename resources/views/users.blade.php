@@ -69,6 +69,7 @@
         data: tableData,
         layout: "fitColumns",
         columns: [
+            {title:"Kasutajanimi", field:"username", width:150, headerFilter:true},
             {title:"Nimi", field:"name", width:150, headerFilter:true},
             {title:"Email", field:"email", headerFilter:true},
             {title:"Taavi kood", field:"taavi_code", headerFilter:true},

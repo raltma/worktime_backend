@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('default_menu')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

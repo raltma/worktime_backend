@@ -35,7 +35,7 @@ Route::get('/logout', [AdminAuthController::class,'logout']);
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/user")->group(function(){
     Route::get('/', function(){
-        $users = User::all();
+        $users = User::where('bs_department_id', '!=','2')->get();
         $departments = Department::all();
         return view('users',['title'=>'Kasutajad', 'users'=>$users, 'departments'=>$departments]);
     });

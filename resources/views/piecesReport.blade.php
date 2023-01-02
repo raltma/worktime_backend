@@ -31,11 +31,13 @@
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
             {title:"Töökoht", field:"workplace", headerFilter:true},
-            {title:"Tükid/Liigitused", variableHeight:true, formatter:function(cell, formatterParams, onRendered){
+            {title:"Tükid/Liigitused/Ületund", variableHeight:true, formatter:function(cell, formatterParams, onRendered){
                 cell.getElement().style.whiteSpace = "pre-wrap";
                 return cell.getRow().getData().classifications
-                .map((c)=> c.quantity +"tk" + "\t" + c.classification.name)
-                .join("\n");
+                .map((c)=> {
+                    const overtime = c.overtime === 1? "Jah":"Ei"
+                    return c.quantity +"tk" + "\t" + c.classification.name + "\t" + overtime       
+                }).join("\n");
             }},
             {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
@@ -46,7 +48,9 @@
                     </form>`;
                 }
                 return "Kinnitatud";
-            }}
+            }},
+            {title:"Kinnitaja", field:"confirmer.name", headerFilter:true},
+            {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true}
         ]
     })
 

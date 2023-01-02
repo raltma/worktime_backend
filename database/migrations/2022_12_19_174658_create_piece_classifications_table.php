@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('piece_classifications', function (Blueprint $table) {
             $table->id();
             $table->integer("quantity");
+            $table->boolean("overtime")->default(false);
             $table->foreignId("piece_report_id")->constrained();
             $table->timestamps();
             $table->softDeletes();

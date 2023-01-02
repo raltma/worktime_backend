@@ -15,7 +15,7 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
         if (Auth::attempt($credentials)) {
-            if(auth()->user()->admin === 1){
+            if(auth()->user()->admin === 1 && auth()->user()->bs_department_id !== "2"){
                 $request->session()->regenerate();
                 return redirect('/user');
             }

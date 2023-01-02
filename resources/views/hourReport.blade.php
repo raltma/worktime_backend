@@ -46,7 +46,11 @@
                     </form>`;
                 }
                 return "Kinnitatud";
-            }}
+            }},
+            {title:"Kinnitaja", field:"confirmer.name", headerFilter:true},
+            {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true},
+            
+
         ]
     })
 

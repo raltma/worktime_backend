@@ -65,12 +65,20 @@ class AuthController extends Controller
             ], 401);
 
             $user = User::where('username', $request->username)->first();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'User logged in successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
-            ], 200);
+            if($user->bs_department_id !== "2"){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'User logged in successfully',
+                    'token' => $user->createToken("API TOKEN")->plainTextToken,
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Kasutaja on vales grupis sisse logimiseks',
+                    'error' => $validateUser->errors()
+                ], 401);
+            }
+            
         } catch(\Throwable $th){
             return response()->json([
                 'status' => false,

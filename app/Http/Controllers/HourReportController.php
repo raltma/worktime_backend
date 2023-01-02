@@ -21,6 +21,8 @@ class HourReportController extends Controller
               ], 400);
               $report = HourReport::find($request->reportId);
               $report->confirmed = 1;
+              $report->confirmer_id = $request->user()->id;
+              $report->confirmed_at = now();
               $report->save();
               return back()->withErrors(['message'=>"Aruanne kinnitatud"]);
       }

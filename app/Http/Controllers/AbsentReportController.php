@@ -27,6 +27,8 @@ class AbsentReportController extends Controller
               ], 400);
               $report = AbsentReport::find($request->reportId);
               $report->confirmed = 1;
+              $report->confirmer_id = $request->user()->id;
+              $report->confirmed_at = now();
               $report->save();
               return back()->withErrors(['message'=>"Aruanne kinnitatud"]);
       }
