@@ -33,11 +33,12 @@
             {title:"Töökoht", field:"workplace", headerFilter:true},
             {title:"Tükid/Liigitused/Ületund", variableHeight:true, formatter:function(cell, formatterParams, onRendered){
                 cell.getElement().style.whiteSpace = "pre-wrap";
-                return cell.getRow().getData().classifications
+                let rows = cell.getRow().getData().classifications
                 .map((c)=> {
                     const overtime = c.overtime === 1? "Jah":"Ei"
-                    return c.quantity +"tk" + "\t" + c.classification.name + "\t" + overtime       
-                }).join("\n");
+                    return "<tr><td>" + c.quantity +"tk" + "</td><td>" + c.classification.name + "</td><td>" + overtime + "</td></tr>"       
+                }).join("");
+                return "<table class='cTable'>" +rows+ "</table>"
             }},
             {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
@@ -56,6 +57,7 @@
 
     table.on("rowClick", function(e, row){
         let rowData = row.getData()
+        window.location.href = "{{URL::to('piecesReport/update')}}"+ "/"+ rowData.id
     });
 </script>
 @endsection

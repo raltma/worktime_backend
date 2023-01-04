@@ -7,6 +7,18 @@
                 "code": "0"
             },
             {
+                "name":"Puhkusekompensatsioon",
+                "code":"W"
+            },
+            {
+                "name": "Juhatuse liikme puhkus",
+                "code": "a"
+            },
+            {
+                "name":"Muud liiki puhkus",
+                "code":"Y"
+            },
+            {
                 "name": "Õppepuhkus miinimumpalgaga",
                 "code": "p"
             },
@@ -23,6 +35,10 @@
                 "code": "L"
             },
             {
+                "name": "Tasustamata lapsepuhkus",
+                "code": "C"
+            },
+            {
                 "name": "Tasustamata haigepuhkus",
                 "code": "B"
             },
@@ -31,8 +47,28 @@
                 "code": "A"
             },
             {
+                "name": "Talvepuhkus",
+                "code": "T"
+            },
+            {
                 "name": "Tasustamata õppepuhkus",
                 "code": "R"
+            },
+            {
+                "name": "Staazhipuhkus",
+                "code": "S"
+            },
+            {
+                "name": "Pikendatud puhkus",
+                "code": "X"
+            },
+            {
+                "name": "Lisapuhkus",
+                "code": "J"
+            },
+            {
+                "name": "Alaealise lisapuhkus",
+                "code": "D"
             },
             {
                 "name": "Töövõimetuspensionäri lisapuhkus",
@@ -41,6 +77,10 @@
             {
                 "name": "Isapuhkus",
                 "code": "K"
+            },
+            {
+                "name": "Lapsendaja puhkus",
+                "code": "h"
             },
             {
                 "name": "Lapsepuhkus",
@@ -68,18 +108,30 @@
                 "code": "O"
             },
             {
+                "name": "Tervistkahjustava töö",
+                "code": "F"
+            },
+            {
                 "name": "Õppekogunemine",
                 "code": "Õ"
             },
             {
                 "name": "Tasustatav vaba päev",
                 "code": "V"
+            },
+            {
+                "name": "Administratsiooni loal",
+                "code": "N"
             }
         ]
     },
     {
         "header": "Muu",
         "items": [
+            {
+                "name": "Streik",
+                "code": "s"
+            },
             {
                 "name": "Tööluus",
                 "code": "Z"

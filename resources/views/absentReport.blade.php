@@ -44,6 +44,7 @@
             {title:"Manus", field:"filepath",  headerFilter:true, 
                 formatter:"link", formatterParams:{
                 target:"_blank",
+                labelField:"filename"
             }},
             {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
@@ -62,6 +63,7 @@
 
     table.on("rowClick", function(e, row){
         let rowData = row.getData()
+        window.location.href = "{{URL::to('absentReport/update')}}"+ "/"+ rowData.id
     });
 </script>
 @endsection

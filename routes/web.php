@@ -7,10 +7,12 @@ use App\Http\Controllers\PieceReportController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Classification;
 use App\Models\HourReport;
 use App\Models\PieceReport;
 use App\Models\AbsentReport;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
 /*
@@ -28,7 +30,10 @@ Route::get('/', function () {
     return redirect('/user');
 });
 Route::get('/login', function(){
-    return view('login',['title'=>'Sisse logimine']);
+    if(!Auth::check()){
+        return view('login',['title'=>'Sisse logimine']);
+    }
+    return redirect('/user');
 })->name('login');
 Route::post('/login', [AdminAuthController::class,'authenticate']);
 Route::get('/logout', [AdminAuthController::class,'logout']);
@@ -59,6 +64,11 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
         return view('hourReport',['title'=>'Tunni aruanded', 'reports'=>$reports]);
     });
     Route::post('/confirm', [HourReportController::class,'confirm']);
+    Route::get('/update/{id}', function($id){
+        $report = HourReport::find($id);
+        return view('hourReportUpdate', ['report'=>$report, 'title'=>'Tundide aruande muutmine']);
+    });
+    Route::post('/update',[HourReportController::class, 'update']);
 });
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(function(){
@@ -78,6 +88,15 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
         return view('absentReport',['title'=>'Puudumiste aruanded', 'reports'=>$reports]);
     });
     Route::post('/confirm', [AbsentReportController::class,'confirm']);
+    Route::get('/update/{id}', function($id){
+        $report = AbsentReport::find($id);
+        $reasons = json_decode(File::get(resource_path("json/absentReasons.json")));
+        return view('absentReportUpdate', [
+            'report'=>$report, 
+            'reasons'=>$reasons, 
+            'title'=>'Puudumiste aruande muutmine']);
+    });
+    Route::post('/update',[AbsentReportController::class, 'update']);
 });
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(function(){
@@ -97,6 +116,17 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(functi
         return view('piecesReport',['title'=>'Tükkide aruanded', 'reports'=>$reports]);
     });
     Route::post('/confirm', [PieceReportController::class,'confirm']);
+    Route::get('/update/{id}', function($id){
+        $report = PieceReport::find($id);
+        $classifications = Classification::all();
+        $workplaces = json_decode(File::get(resource_path("json/workplaces.json")));
+        return view('piecesReportUpdate', [
+            'report'=>$report, 
+            'classifications'=>$classifications, 
+            'workplaces'=>$workplaces,
+            'title'=>'Tükkide aruande muutmine']);
+    });
+    Route::post('/update',[PieceReportController::class, 'update']);
 });
 
 Route::get("/api/absentReasons", function(){

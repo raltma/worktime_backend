@@ -80,7 +80,6 @@
     })
 
     table.on("rowClick", function(e, row){
-        console.log(adminSelect.getSelected());
         let rowData = row.getData()
         document.getElementById('selectedUser').value = rowData.id;
         document.getElementById('username').value = rowData.username;

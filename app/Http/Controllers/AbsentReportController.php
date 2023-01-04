@@ -14,7 +14,44 @@ class AbsentReportController extends Controller
        *
        * @return \Illuminate\Http\Response
        */
-
+      public function update(Request $request){
+        $validate = Validator::make($request->all(),['id'=> 'required']);
+        if($validate->fails()) return back()->withErrors([
+                'error' => 'ID puudus!']);
+        $input = $request->all();     
+        if(auth()->user()->admin === 1){
+            $report = AbsentReport::find($input['id']);
+            
+            if(isset($input['date'])) $report->date_selected = $input['date'];
+            if(isset($input['shift']))$report->shift = $input['shift'];
+            if(isset($input['hours']))$report->hours = $input['hours'];
+            if(isset($input['reason']))$report->reason = $input['reason'];
+            $file = $request->file('file');
+            if($file !== null){
+                $file_uploaded_path = $file->store("absentReport",'public');
+                $file_uploaded_path = asset("storage/".$file_uploaded_path);
+                $report->filepath = $file_uploaded_path;
+                $report->filename = $file->getClientOriginalName();
+            }
+            if(isset($input['confirmed'])){
+                if($report->confirmed !== 1){
+                    $report->confirmer_id = $request->user()->id;
+                    $report->confirmed_at = now();
+                }
+                $report->confirmed = 1;
+            }else{
+                $report->confirmed = 0;
+                $report->confirmer_id = null;
+                $report->confirmed_at = null;
+            }
+            $report->save();
+            return back()->withErrors(['message'=>"Aruanne muudetud"]);
+        }
+        return back()->withErrors([
+            'error' => 'Kasutajal pole admini õigust!',
+        ])->onlyInput('message');
+        }
+        
       public function confirm(Request $request){
         $validate = Validator::make($request->all(),
               [
@@ -72,6 +109,7 @@ class AbsentReportController extends Controller
             $file_uploaded_path = $file->store("absentReport",'public');
             $file_uploaded_path = asset("storage/".$file_uploaded_path);
             $report->filepath = $file_uploaded_path;
+            $report->filename = $file->getClientOriginalName();
           }
           $report->save();
           
@@ -87,21 +125,6 @@ class AbsentReportController extends Controller
       public function show(Request $request, $reportId)
       {
           return AbsentReport::find($reportId);
-      }
-  
-      /**
-       * Update the specified resource in storage.
-       *
-       * @param  \Illuminate\Http\Request  $request
-       * @param  \App\Models\Post  $post
-       * @return \Illuminate\Http\Response
-       */
-      public function update(Request $request, $id)
-      {
-          AbsentReport::where('id',$id)->update($request->all());
-          $report = AbsentReport::find($id);
-          
-          return $report;
       }
   
       /**

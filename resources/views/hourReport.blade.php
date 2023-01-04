@@ -56,6 +56,7 @@
 
     table.on("rowClick", function(e, row){
         let rowData = row.getData()
+        window.location.href = "{{URL::to('hourReport/update')}}"+ "/"+ rowData.id
     });
 </script>
 @endsection

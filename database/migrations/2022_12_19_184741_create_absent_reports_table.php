@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("hours");
             $table->string("reason");
             $table->string("filepath")->nullable();
+            $table->string("filename")->nullable();
             $table->foreignId("user_id")->constrained;
             $table->boolean("confirmed")->default(false);
             $table->unsignedBigInteger('confirmer_id')->nullable();
