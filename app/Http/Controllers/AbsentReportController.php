@@ -86,6 +86,22 @@ class AbsentReportController extends Controller
           $reports = AbsentReport::all();
           return $reports;
       }
+
+      public function getByDate(Request $request)
+      {
+        $validate = Validator::make($request->all(),
+            [
+                'date' => 'required|date'
+            ]);
+        if($validate->fails()) return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'error' => $validate->errors()
+        ], 400);
+        $data = $request->validated();
+        $reports = AbsentReport::where('date_selected', $data['date']);
+        return $reports;
+      }
   
       /**
        * Store a newly created resource in storage.

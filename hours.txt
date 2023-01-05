@@ -6,3 +6,4 @@
 4h - migra script
 4h - setup 6
 5h - setup 7
+7h - setup 8

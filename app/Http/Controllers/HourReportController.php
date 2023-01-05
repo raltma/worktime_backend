@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\Validator;
 class HourReportController extends Controller
 {
 
+    public function getByDate(Request $request)
+      {
+        $validate = Validator::make($request->all(),
+            [
+                'date' => 'required|date'
+            ]);
+        if($validate->fails()) return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'error' => $validate->errors()
+        ], 400);
+        $data = $request->all();
+        $reports = HourReport::where('date_selected', $data['date'])->get();
+        return $reports;
+      }
+
     public function delete(Request $request, $id){
         $report = HourReport::find($id);
         if($report !== null){
