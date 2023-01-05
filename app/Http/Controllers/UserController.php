@@ -24,6 +24,7 @@ class UserController extends Controller
             $user = User::find($input['id']);
             
             if(isset($input['username'])) $user->username = $input['username'];
+            if(isset($input['default_tab'])) $user->default_tab = $input['default_tab'];
             if(isset($input['password']))$user->password = Hash::make($input['password']);
             $user->adminDepartments()->detach();
             if(isset($input['admin'])){

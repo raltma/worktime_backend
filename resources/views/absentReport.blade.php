@@ -46,18 +46,25 @@
                 target:"_blank",
                 labelField:"filename"
             }},
-            {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
+            {title:"Kinnitatud",headerSort:false, field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
                     return `<form autocomplete="off" action="{{url('absentReport/confirm')}}" method="post">
                     @csrf
                     <input type="hidden" name="reportId" value="${cell.getRow().getData().id}">
-                    <input type="submit" value="Kinnita"/>
+                    <input class="submitButton" type="submit" value="Kinnita"/>
                     </form>`;
                 }
                 return "Kinnitatud";
             }},
             {title:"Kinnitaja", field:"confirmer.name", headerFilter:true},
             {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true},
+            {title:"", headerSort:false, width:175, formatter:function(cell, formatterParams, onRendered){
+                    let id = cell.getRow().getData().id
+                    return `<form autocomplete="off" action="{{url('absentReport/delete/${id}')}}" method="post">
+                    @csrf
+                    <input class="deleteButton" type="submit" value="Kustuta"/>
+                    </form>`;
+            }}
         ]
     })
 

@@ -3,6 +3,7 @@
 @section('title', $title)
     <link href="{{asset('/slimselect/slimselect.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('/slimselect/slimselect.min.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('/css/updateForms.css')}}">
 @section('head')
 @endsection
 
@@ -18,8 +19,8 @@
 <form method="post" autocomplete="off" action="{{url('absentReport/update')}}">
 @csrf
     <div>
-        <label>Kasutaja:</label>
-        <span>{{$report->user->name}}</span>
+        <label>Esitaja:</label>
+        <span><i>{{$report->user->name}}</i></span>
         <input type="hidden" name="id" value="{{$report->id}}">
     </div>
     <div>
@@ -27,15 +28,17 @@
         <input id="date" required name="date" type="date" value="{{$report->date_selected}}">
     </div>
     <div>
-        <span>Vahetus:</span>
-        <label>
-            2
-            <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
-        </label>
-        <label>
-            3
-            <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
-        </label>
+        <label>Vahetus:</label>
+        <div>
+            <label>
+                2
+                <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
+            </label>
+            <label>
+                3
+                <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
+            </label>
+        </div>
     </div>
     <div>       
         <label>Tunnid:</label>

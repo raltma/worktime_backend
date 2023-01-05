@@ -3,6 +3,7 @@
 @section('title', $title)
 @section('head')
 <link rel="stylesheet" href="{{asset('/css/piecesReportUpdate.css')}}">
+<link rel="stylesheet" href="{{asset('/css/updateForms.css')}}">
 @endsection
 
 @section('content')
@@ -17,8 +18,8 @@
 <form method="post" autocomplete="off" action="{{url('piecesReport/update')}}">
 @csrf
     <div>
-        <label>Kasutaja:</label>
-        <span>{{$report->user->name}}</span>
+        <label>Esitaja:</label>
+        <span><i>{{$report->user->name}}</i></span>
         <input type="hidden" name="id" value="{{$report->id}}">
     </div>
     <div>
@@ -26,15 +27,17 @@
         <input id="date" required name="date" type="date" value="{{$report->date_selected}}">
     </div>
     <div>
-        <span>Vahetus:</span>
-        <label>
-            2
-            <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
-        </label>
-        <label>
-            3
-            <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
-        </label>
+        <label>Vahetus:</label>
+        <div>
+            <label>
+                2
+                <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
+            </label>
+            <label>
+                3
+                <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
+            </label>
+        </div>
     </div>
     <div>       
         <label>Töökoht:</label>
@@ -44,10 +47,10 @@
         @endforeach
         </select>
     </div>
-    <div class="classificationsContainer">
+    <section class="classificationsContainer">
         <div class="classificationsHeader">
             <div>Liigitused</div>
-            <div>Kogus</div>
+            <div>Tükid</div>
             <div>Ületunnid</div>
             <div><button type="button" onclick="addRow()">+</button></div>
         </div>
@@ -67,12 +70,12 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </section>
     <div>
         <label>Kinnitatud:</label>
         <input @if($report->confirmed === 1) checked @endif id="confirmed" name="confirmed" type="checkbox">
     </div>
-    <input type="submit" value="Salvesta">
+    <input class="submitButton" type="submit" value="Salvesta">
 </form>
 <script>
 let rowCount = {{sizeof($report->classifications)}} - 1

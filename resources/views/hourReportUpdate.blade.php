@@ -3,6 +3,7 @@
 @section('title', $title)
 
 @section('head')
+<link rel="stylesheet" href="{{asset('/css/updateForms.css')}}">
 @endsection
 
 @section('content')
@@ -17,8 +18,8 @@
 <form method="post" autocomplete="off" action="{{url('hourReport/update')}}">
 @csrf
     <div>
-        <label>Kasutaja:</label>
-        <span>{{$report->user->name}}</span>
+        <label>Esitaja:</label>
+        <span><i>{{$report->user->name}}</i></span>
         <input id="selectedUser" type="hidden" name="id" value="{{$report->id}}">
     </div>
     <div>
@@ -26,15 +27,17 @@
         <input id="date" required name="date" type="date" value="{{$report->date_selected}}">
     </div>
     <div>
-        <span>Vahetus:</span>
-        <label>
-            2
-            <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
-        </label>
-        <label>
-            3
-            <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
-        </label>
+        <label>Vahetus:</label>
+        <div>
+            <label>
+                2
+                <input @if($report->shift === 2) checked @endif name="shift" type="radio" value="2">
+            </label>
+            <label>
+                3
+                <input @if($report->shift === 3) checked @endif name="shift" type="radio" value="3">
+            </label>
+        </div>
     </div>
     <div>       
         <label>Tunnid:</label>
@@ -48,7 +51,7 @@
         <label>Kinnitatud:</label>
         <input @if($report->confirmed === 1) checked @endif id="confirmed" name="confirmed" type="checkbox">
     </div>
-    <input type="submit" value="Salvesta">
+    <input class="submitButton" type="submit" value="Salvesta">
 </form>
 
 @endsection

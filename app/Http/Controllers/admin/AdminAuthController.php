@@ -17,7 +17,7 @@ class AdminAuthController extends Controller
         if (Auth::attempt($credentials)) {
             if(auth()->user()->admin === 1 && auth()->user()->bs_department_id !== "2"){
                 $request->session()->regenerate();
-                return redirect('/user');
+                return redirect('/home');
             }
             Auth::logout();
             $request->session()->invalidate();

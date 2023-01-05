@@ -1,0 +1,46 @@
+form{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 45rem;
+    display: grid;
+    justify-items: center;
+    border: 2px solid black;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+form > * {
+    padding: .5rem;
+    width: 100%;
+}
+form > div{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 1rem;
+}
+form > div > label{
+    justify-self: end;
+}
+
+input[type="number"]{
+    width: 4rem;
+}
+
+input[type="checkbox"]{
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-self: start;
+}
+
+input[type="date"]{
+    width: fit-content;
+}
+
+select{
+    width: fit-content;
+}
+
+#adminDepartmentContainer{
+    max-width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+}

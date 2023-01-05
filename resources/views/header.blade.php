@@ -4,11 +4,12 @@
     </div>
     @auth
         <div class="links">
-            <a 
-            class="@if(request()->route()->uri==='user') selected @endif" 
-            href="{{url('user')}}"
-            >Kasutajad</a>
-
+            @if(in_array("0",array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray())))
+                <a 
+                class="@if(request()->route()->uri==='user') selected @endif" 
+                href="{{url('user')}}"
+                >Kasutajad</a>
+            @endif
             <a 
             class="@if(request()->route()->uri==='hourReport') selected @endif" 
             href="{{url('hourReport')}}"

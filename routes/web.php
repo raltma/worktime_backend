@@ -25,24 +25,31 @@ use Illuminate\Database\Eloquent\Builder;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/home', function(){
+    return redirect(auth()->user()->default_tab);
+});
 Route::get('/', function () {
-    return redirect('/user');
+    return redirect('/login');
 });
 Route::get('/login', function(){
     if(!Auth::check()){
         return view('login',['title'=>'Sisse logimine']);
     }
-    return redirect('/user');
+    return redirect('/home');
 })->name('login');
 Route::post('/login', [AdminAuthController::class,'authenticate']);
 Route::get('/logout', [AdminAuthController::class,'logout']);
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/user")->group(function(){
     Route::get('/', function(){
-        $users = User::where('bs_department_id', '!=','2')->get();
-        $departments = Department::all();
-        return view('users',['title'=>'Kasutajad', 'users'=>$users, 'departments'=>$departments]);
+        $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
+        if(in_array("0",$adminDepartments)){
+            $users = User::where('bs_department_id', '!=','2')->get();
+            $departments = Department::all();
+            return view('users',['title'=>'Kasutajad', 'users'=>$users, 'departments'=>$departments]);
+        }else{
+            return redirect('/hourReport');
+        }
     });
     Route::post('/update', [UserController::class,'updateUser']);
 });
@@ -69,6 +76,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
         return view('hourReportUpdate', ['report'=>$report, 'title'=>'Tundide aruande muutmine']);
     });
     Route::post('/update',[HourReportController::class, 'update']);
+    Route::post('/delete/{id}', [HourReportController::class,'delete']);
 });
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(function(){
@@ -97,6 +105,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
             'title'=>'Puudumiste aruande muutmine']);
     });
     Route::post('/update',[AbsentReportController::class, 'update']);
+    Route::post('/delete/{id}', [AbsentReportController::class,'delete']);
 });
 
 Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(function(){
@@ -127,6 +136,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(functi
             'title'=>'Tükkide aruande muutmine']);
     });
     Route::post('/update',[PieceReportController::class, 'update']);
+    Route::post('/delete/{id}', [PieceReportController::class,'delete']);
 });
 
 Route::get("/api/absentReasons", function(){

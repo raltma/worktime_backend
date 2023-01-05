@@ -1,4 +1,5 @@
 .classificationsContainer{
+    border: 1px solid black;
     width: 95%;
     max-width: 30rem;
 }

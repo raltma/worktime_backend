@@ -31,27 +31,34 @@
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
             {title:"Töökoht", field:"workplace", headerFilter:true},
-            {title:"Tükid/Liigitused/Ületund", variableHeight:true, formatter:function(cell, formatterParams, onRendered){
+            {title:"Liigitused/Tükid/Ületunnid", variableHeight:true, width:350, formatter:function(cell, formatterParams, onRendered){
                 cell.getElement().style.whiteSpace = "pre-wrap";
                 let rows = cell.getRow().getData().classifications
                 .map((c)=> {
                     const overtime = c.overtime === 1? "Jah":"Ei"
-                    return "<tr><td>" + c.quantity +"tk" + "</td><td>" + c.classification.name + "</td><td>" + overtime + "</td></tr>"       
+                    return "<tr><td>" + c.classification.name + "</td><td>" + c.quantity +"tk" + "</td><td>" + overtime + "</td></tr>"       
                 }).join("");
                 return "<table class='cTable'>" +rows+ "</table>"
             }},
-            {title:"Kinnitatud", field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
+            {title:"Kinnitatud",headerSort:false, field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
                     return `<form autocomplete="off" action="{{url('piecesReport/confirm')}}" method="post">
                     @csrf
                     <input type="hidden" name="reportId" value="${cell.getRow().getData().id}">
-                    <input type="submit" value="Kinnita"/>
+                    <input class="submitButton" type="submit" value="Kinnita"/>
                     </form>`;
                 }
                 return "Kinnitatud";
             }},
             {title:"Kinnitaja", field:"confirmer.name", headerFilter:true},
-            {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true}
+            {title:"Kinnitamise kuupäev ", field:"confirmed_at", headerFilter:true},
+            {title:"", headerSort:false, width:175, formatter:function(cell, formatterParams, onRendered){
+                    let id = cell.getRow().getData().id
+                    return `<form autocomplete="off" action="{{url('piecesReport/delete/${id}')}}" method="post">
+                    @csrf
+                    <input class="deleteButton" type="submit" value="Kustuta"/>
+                    </form>`;
+            }}
         ]
     })
 

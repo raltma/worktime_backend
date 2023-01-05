@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Validator;
 
 class PieceReportController extends Controller
 {
+    public function delete(Request $request, $id){
+        $report = PieceReport::find($id);
+        if($report !== null){
+            $report->delete();
+            return back()->withErrors(['message'=>"Aruanne Kustutatud"]);
+        }
+        return back()->withErrors([
+            'error' => 'Aruannet ei leitud andmebaasist',
+        ])->onlyInput('message');
+    }
+
     public function update(Request $request){
         $validate = Validator::make($request->all(),['id'=> 'required']);
         if($validate->fails()) return back()->withErrors([
