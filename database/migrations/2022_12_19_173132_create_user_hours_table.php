@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained();
             $table->unsignedBigInteger('confirmer_id')->nullable();
             $table->timestamp("confirmed_at")->nullable();
+            $table->string("biostar_check")->default("Pole tehtud");
             $table->foreign("confirmer_id")
                 ->references("id")
                 ->on("users");

@@ -15,6 +15,24 @@ class AbsentReportController extends Controller
        * @return \Illuminate\Http\Response
        */
 
+       public function getByDate(Request $request)
+      {
+        $validate = Validator::make($request->all(),
+            [
+                'date' => 'required|date'
+            ]);
+        if($validate->fails()) return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'error' => $validate->errors()
+        ], 400);
+        $data = $request->all();
+        $reports = HourReport::where('date_selected', $data['date'])
+        ->where('confirmed','=', 1)
+        ->get();
+        return $reports;
+      }
+
         public function delete(Request $request, $id){
         $report = AbsentReport::find($id);
         if($report !== null){

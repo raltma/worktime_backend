@@ -40,6 +40,19 @@
                 }).join("");
                 return "<table class='cTable'>" +rows+ "</table>"
             }},
+            {title:"Biostari kontroll", field:"biostar_check", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
+                    let id = cell.getValue()
+                    if(cell.getValue() === "Polnud majas"){
+                        cell.getElement().style.backgroundColor = "#EE7C71";
+                    }else if(cell.getValue()==="Oli majas"){
+                        cell.getElement().style.backgroundColor = "#b7f1b7";
+                    }else if(cell.getValue()==="Pole tehtud"){
+                        return cell.getValue();
+                    }else{
+                        cell.getElement().style.backgroundColor = "#b7f1b7";
+                    }
+                    return cell.getValue();
+            }},
             {title:"Kinnitatud",headerSort:false, field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
                     return `<form autocomplete="off" action="{{url('piecesReport/confirm')}}" method="post">

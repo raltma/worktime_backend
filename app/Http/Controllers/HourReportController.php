@@ -22,7 +22,9 @@ class HourReportController extends Controller
             'error' => $validate->errors()
         ], 400);
         $data = $request->all();
-        $reports = HourReport::where('date_selected', $data['date'])->get();
+        $reports = HourReport::where('date_selected', $data['date'])
+        ->where('confirmed','=', 1)
+        ->get();
         return $reports;
       }
 
