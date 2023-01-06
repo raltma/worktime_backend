@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('absent_reports', function (Blueprint $table) {
             $table->id();
-            $table->date("date_selected");
+            $table->date("date_start");
+            $table->date("date_end");
             $table->integer("shift");
             $table->integer("hours");
             $table->string("reason");

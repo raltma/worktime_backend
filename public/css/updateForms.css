@@ -44,3 +44,8 @@ select{
     margin-left: auto;
     margin-right: auto;
 }
+
+.dateInputContainer > div{
+        display: flex;
+        gap: .5rem;
+    }

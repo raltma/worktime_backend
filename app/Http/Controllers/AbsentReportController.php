@@ -34,7 +34,8 @@ class AbsentReportController extends Controller
         if(auth()->user()->admin === 1){
             $report = AbsentReport::find($input['id']);
             
-            if(isset($input['date'])) $report->date_selected = $input['date'];
+            if(isset($input['date_start'])) $report->date_start = $input['date_start'];
+            if(isset($input['date_end'])) $report->date_end = $input['date_end'];
             if(isset($input['shift']))$report->shift = $input['shift'];
             if(isset($input['hours']))$report->hours = $input['hours'];
             if(isset($input['reason']))$report->reason = $input['reason'];
@@ -86,22 +87,6 @@ class AbsentReportController extends Controller
           $reports = AbsentReport::all();
           return $reports;
       }
-
-      public function getByDate(Request $request)
-      {
-        $validate = Validator::make($request->all(),
-            [
-                'date' => 'required|date'
-            ]);
-        if($validate->fails()) return response()->json([
-            'status' => false,
-            'message' => 'validation error',
-            'error' => $validate->errors()
-        ], 400);
-        $data = $request->validated();
-        $reports = AbsentReport::where('date_selected', $data['date']);
-        return $reports;
-      }
   
       /**
        * Store a newly created resource in storage.
@@ -113,7 +98,8 @@ class AbsentReportController extends Controller
       {
           $validate = Validator::make($request->all(),
               [
-                  'date_selected' => 'required|date',
+                  'date_start' => 'required|date',
+                  'date_end' => 'required|date',
                   'user_id' => 'required',
                   'reason' => 'required',
                   'shift' => 'required',
@@ -127,7 +113,8 @@ class AbsentReportController extends Controller
                   'error' => $validate->errors()
               ], 400);
           $report = new AbsentReport;
-          $report->date_selected = $request->date_selected;
+          $report->date_start = $request->date_start;
+          $report->date_end = $request->date_end;
           $report->shift = $request->shift;
           $report->reason = $request->reason;
           $report->user_id = $request->user_id;

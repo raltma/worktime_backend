@@ -23,9 +23,18 @@
         <span><i>{{$report->user->name}}</i></span>
         <input type="hidden" name="id" value="{{$report->id}}">
     </div>
-    <div>
+    <div class="dateInputContainer">
         <label>Kuupäev:</label>
-        <input id="date" required name="date" type="date" value="{{$report->date_selected}}">
+        <div>
+            <div>
+                <div>Algus</div>
+                <input id="date" required name="date_start" type="date" value="{{$report->date_start}}">
+            </div>
+            <div>
+                <div>Lõpp</div>
+                <input id="date" required name="date_end" type="date" value="{{$report->date_end}}">
+            </div>
+        </div>
     </div>
     <div>
         <label>Vahetus:</label>

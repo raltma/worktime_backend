@@ -24,13 +24,15 @@
     let absentReasons = {{Js::from(json_decode(File::get(resource_path("json/absentReasons.json"))))}}
     absentReasons = absentReasons.map((d)=>d.items).flat(1)
     let tableData = {{ Js::from($reports) }};
+    console.log(tableData)
     let table = new Tabulator("#table", {
         data: tableData,
         layout: "fitColumns",
         initialHeaderFilter:[{field:"confirmed", value:false}],
         columns: [
             {title:"Esitaja nimi", field:"user.name", width:150, headerFilter:true},
-            {title:"Kuupäev", field:"date_selected", headerFilter:true},
+            {title:"Alguse kuupäev", field:"date_start", headerFilter:true},
+            {title:"Lõpu kuupäev", field:"date_end", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
             {title:"Tunnid", field:"hours", headerFilter:true},
             {title:"Kood/Põhjus", field:"reason", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
