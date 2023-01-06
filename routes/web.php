@@ -90,7 +90,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
                 $query->whereIn('bs_id', $adminDepartments);
             })
             ->orderByDesc('confirmed')
-            ->orderByDesc('date_selected')
+            ->orderByDesc('date_start')
             ->get();
         }
         return view('absentReport',['title'=>'Puudumiste aruanded', 'reports'=>$reports]);
