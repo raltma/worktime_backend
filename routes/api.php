@@ -38,4 +38,5 @@ Route::middleware('auth:sanctum')->apiResource('pieceReport', PieceReportControl
 Route::middleware('auth:sanctum')->apiResource('absentReport', AbsentReportController::class);
 
 Route::get('/hourReportsByDate', [HourReportController::class, 'getByDate']);
+Route::get('/absentReportsByDate', [AbsentReportController::class, 'getByDate']);
 

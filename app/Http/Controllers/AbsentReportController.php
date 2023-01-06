@@ -19,7 +19,8 @@ class AbsentReportController extends Controller
       {
         $validate = Validator::make($request->all(),
             [
-                'date' => 'required|date'
+                'date_start' => 'required|date',
+                'date_end' => 'required|date'
             ]);
         if($validate->fails()) return response()->json([
             'status' => false,
@@ -27,7 +28,7 @@ class AbsentReportController extends Controller
             'error' => $validate->errors()
         ], 400);
         $data = $request->all();
-        $reports = HourReport::where('date_selected', $data['date'])
+        $reports = AbsentReport::whereBetween('date_start', [$data['date_start'],$data['date_end']])
         ->where('confirmed','=', 1)
         ->get();
         return $reports;
