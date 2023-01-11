@@ -35,16 +35,16 @@ class UserSeeder extends Seeder
             'department_id' => 2
         ]); */
 
-        /* DB::table('users')->insert([
+        DB::table('users')->insert([
             'bs_id'=>"1",
             'fingerprint_id'=>"1",
             'username'=> "mats",
             'name'=>"madis",
             'email'=>"admin@admin.ee",
             'taavi_code'=>"0000",
-            'bs_department_id'=>"2",
+            'bs_department_id'=>"1",
             'password'=> Hash::make("mats"),
             'admin'=> true
-        ]); */
+        ]);
     }
 }

@@ -14,6 +14,7 @@ use App\Models\AbsentReport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +74,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
     Route::post('/confirm', [HourReportController::class,'confirm']);
     Route::get('/update/{id}', function($id){
         $report = HourReport::find($id);
-        return view('hourReportUpdate', ['report'=>$report, 'title'=>'Tundide aruande muutmine']);
+        $users = User::all();
+        return view('hourReportUpdate', ['users'=>$users, 'report'=>$report, 'title'=>'Tundide aruande muutmine']);
     });
     Route::post('/update',[HourReportController::class, 'update']);
     Route::post('/delete/{id}', [HourReportController::class,'delete']);
@@ -99,7 +101,9 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
     Route::get('/update/{id}', function($id){
         $report = AbsentReport::find($id);
         $reasons = json_decode(File::get(resource_path("json/absentReasons.json")));
+        $users = User::all();
         return view('absentReportUpdate', [
+            'users'=>$users,
             'report'=>$report, 
             'reasons'=>$reasons, 
             'title'=>'Puudumiste aruande muutmine']);
@@ -129,7 +133,9 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(functi
         $report = PieceReport::find($id);
         $classifications = Classification::all();
         $workplaces = json_decode(File::get(resource_path("json/workplaces.json")));
+        $users = User::all();
         return view('piecesReportUpdate', [
+            'users'=>$users,
             'report'=>$report, 
             'classifications'=>$classifications, 
             'workplaces'=>$workplaces,

@@ -46,7 +46,7 @@ class HourReportController extends Controller
         $input = $request->all();     
         if(auth()->user()->admin === 1){
             $report = HourReport::find($input['id']);
-            
+            if(isset($input['user_id'])) $report->user_id = $input['user_id'];
             if(isset($input['date'])) $report->date_selected = $input['date'];
             if(isset($input['shift']))$report->shift = $input['shift'];
             if(isset($input['hours']))$report->hours = $input['hours'];

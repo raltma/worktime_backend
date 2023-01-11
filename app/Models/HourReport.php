@@ -19,7 +19,8 @@ class HourReport extends Model
         'hours',
         'user_id',
         'overtime',
-        'overtime_hours'
+        'overtime_hours',
+        'department'
     ];
     
     protected $with = ['user', 'confirmer'];

@@ -53,6 +53,7 @@ class AbsentReportController extends Controller
         if(auth()->user()->admin === 1){
             $report = AbsentReport::find($input['id']);
             
+            if(isset($input['user_id'])) $report->user_id = $input['user_id'];
             if(isset($input['date_start'])) $report->date_start = $input['date_start'];
             if(isset($input['date_end'])) $report->date_end = $input['date_end'];
             if(isset($input['shift']))$report->shift = $input['shift'];

@@ -30,6 +30,7 @@
             {title:"Esitaja nimi", field:"user.name", width:150, headerFilter:true},
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
+            {title:"Osakond", field:"department", headerFilter:true},
             {title:"Tunnid", field:"hours", headerFilter:true},
             {title:"Ületunnid", field:"overtime_hours", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
                 if(cell.getRow().getData().overtime === 1){

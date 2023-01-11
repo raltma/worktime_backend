@@ -19,7 +19,11 @@
 @csrf
     <div>
         <label>Esitaja:</label>
-        <span><i>{{$report->user->name}}</i></span>
+        <select name="user_id">
+            @foreach ($users as $user)
+                <option @if ($user->id === $report->user->id) selected @endif value="{{$user->id}}">{{$user->name}}</option>
+            @endforeach
+        </select>
         <input type="hidden" name="id" value="{{$report->id}}">
     </div>
     <div>
