@@ -16,7 +16,7 @@ class ClassificationSeeder extends Seeder
     public function run()
     {
         $classifications = [
-            '006TITÕMBL',
+            '066TITÕMBL',
             '066Tittek õmb 2xTit',
             '066TÕMB1,4-1,55',
             '066Teki õmb 2xS',
