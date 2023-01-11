@@ -20,7 +20,7 @@
 @csrf
     <div>
         <label>Esitaja:</label>
-        <select name="user_id">
+        <select id="users" name="user_id">
             @foreach ($users as $user)
                 <option @if ($user->id === $report->user->id) selected @endif value="{{$user->id}}">{{$user->name}}</option>
             @endforeach
@@ -78,11 +78,16 @@
     <input type="submit" value="Salvesta">
 </form>
 <script type="text/javascript">
+
 let reasonSelect = new SlimSelect({
         select: '#reasons',
         settings: {
             closeOnSelect: true,
-        }}
-        )
+        }})
+let userSelect = new SlimSelect({
+    select: '#users',
+    settings: {
+        closeOnSelect: true,
+    }})
 </script>
 @endsection

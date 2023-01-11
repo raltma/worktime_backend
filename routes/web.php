@@ -74,7 +74,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
     Route::post('/confirm', [HourReportController::class,'confirm']);
     Route::get('/update/{id}', function($id){
         $report = HourReport::find($id);
-        $users = User::all();
+        $users = User::all()->sortBy("name");
         return view('hourReportUpdate', ['users'=>$users, 'report'=>$report, 'title'=>'Tundide aruande muutmine']);
     });
     Route::post('/update',[HourReportController::class, 'update']);
@@ -101,7 +101,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
     Route::get('/update/{id}', function($id){
         $report = AbsentReport::find($id);
         $reasons = json_decode(File::get(resource_path("json/absentReasons.json")));
-        $users = User::all();
+        $users = User::all()->sortBy("name");;
         return view('absentReportUpdate', [
             'users'=>$users,
             'report'=>$report, 
@@ -133,7 +133,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(functi
         $report = PieceReport::find($id);
         $classifications = Classification::all();
         $workplaces = json_decode(File::get(resource_path("json/workplaces.json")));
-        $users = User::all();
+        $users = User::all()->sortBy("name");;
         return view('piecesReportUpdate', [
             'users'=>$users,
             'report'=>$report, 

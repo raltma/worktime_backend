@@ -3,6 +3,8 @@
 @section('title', $title)
 
 @section('head')
+<link href="{{asset('/slimselect/slimselect.css')}}" rel="stylesheet">
+<script type="text/javascript" src="{{asset('/slimselect/slimselect.min.js')}}"></script>
 <link rel="stylesheet" href="{{asset('/css/updateForms.css')}}">
 @endsection
 
@@ -19,7 +21,7 @@
 @csrf
     <div>
         <label>Esitaja:</label>
-        <select name="user_id">
+        <select id="users" name="user_id">
             @foreach ($users as $user)
                 <option @if ($user->id === $report->user->id) selected @endif value="{{$user->id}}">{{$user->name}}</option>
             @endforeach
@@ -57,5 +59,11 @@
     </div>
     <input class="submitButton" type="submit" value="Salvesta">
 </form>
-
+<script type="text/javascript">
+let userSelect = new SlimSelect({
+    select: '#users',
+    settings: {
+        closeOnSelect: true,
+    }})
+</script>
 @endsection
