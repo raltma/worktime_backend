@@ -12,20 +12,13 @@ class HourReportController extends Controller
 
     public function getByDate(Request $request)
       {
-        $validate = Validator::make($request->all(),
-            [
-                'date' => 'required|date'
-            ]);
-        if($validate->fails()) return response()->json([
-            'status' => false,
-            'message' => 'validation error',
-            'error' => $validate->errors()
-        ], 400);
         $data = $request->all();
-        $reports = HourReport::where('date_selected', $data['date'])
-        ->where('confirmed','=', 1)
-        ->get();
-        return $reports;
+        $reports = HourReport::where('confirmed','=', 1);
+        //optional parameter for requesting by date
+        if(isset($data['date'])) $reports = $reports->where('date_selected', $data['date']);
+        //optional parameter for selecting department
+        if(isset($data['department'])) $reports = $reports->where('department', '=', $data['department']);
+        return $reports->get();
       }
 
     public function delete(Request $request, $id){
