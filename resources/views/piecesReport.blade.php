@@ -26,6 +26,9 @@
         data: tableData,
         layout: "fitColumns",
         initialHeaderFilter:[{field:"confirmed", value:false}],
+        initialSort:[
+            {column:'date_selected', dir:"desc"},
+        ],
         columns: [
             {title:"Esitaja nimi", field:"user.name", width:150, headerFilter:true},
             {title:"Kuupäev", field:"date_selected", headerFilter:true},
