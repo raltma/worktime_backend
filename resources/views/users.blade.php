@@ -81,6 +81,8 @@
     let table = new Tabulator("#table", {
         data: tableData,
         layout: "fitColumns",
+        pagination: true,
+        height:"70vh",
         columns: [
             {title:"Kasutajanimi", field:"username", width:150, headerFilter:true},
             {title:"Nimi", field:"name", width:150, headerFilter:true},
