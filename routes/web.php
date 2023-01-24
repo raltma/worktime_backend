@@ -63,7 +63,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/hourReport")->group(function
         }else{
             $reports = HourReport::whereHas('user', function(Builder $query){
                 $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
-                $query->whereIn('bs_id', $adminDepartments);
+                $query->whereIn('bs_department_id', $adminDepartments);
             })
             ->orderByDesc('confirmed')
             ->orderByDesc('date_selected')
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/absentReport")->group(functi
         }else{
             $reports = AbsentReport::whereHas('user', function(Builder $query){
                 $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
-                $query->whereIn('bs_id', $adminDepartments);
+                $query->whereIn('bs_department_id', $adminDepartments);
             })
             ->orderByDesc('confirmed')
             ->orderByDesc('date_start')
@@ -120,7 +120,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix("/piecesReport")->group(functi
         }else{
             $reports = PieceReport::whereHas('user', function(Builder $query){
                 $adminDepartments = array_map(function($d){return $d['bs_id'];},auth()->user()->adminDepartments->toArray());
-                $query->whereIn('bs_id', $adminDepartments);
+                $query->whereIn('bs_department_id', $adminDepartments);
             })
             ->orderByDesc('confirmed')
             ->orderByDesc('date_selected')
