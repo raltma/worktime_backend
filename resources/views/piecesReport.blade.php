@@ -25,6 +25,8 @@
     let table = new Tabulator("#table", {
         data: tableData,
         layout: "fitColumns",
+        pagination: true,
+        height:"70vh",
         initialHeaderFilter:[{field:"confirmed", value:false}],
         initialSort:[
             {column:'date_selected', dir:"desc"},

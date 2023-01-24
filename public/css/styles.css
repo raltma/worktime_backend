@@ -20,6 +20,9 @@
     left: 0;
 }
 
+#table{
+    margin-bottom: 5rem;
+}
 .headerImg{
     text-align: center;
     height: 10rem;
