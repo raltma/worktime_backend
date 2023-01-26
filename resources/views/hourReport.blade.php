@@ -39,7 +39,10 @@
             {title:"Tunnid", field:"hours", headerFilter:true},
             {title:"Ületunnid", field:"overtime_hours", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
                 if(cell.getRow().getData().overtime === 1){
-                    return cell.getValue();
+                    let time = cell.getValue();
+                    let hours = Math.floor(time);
+                    let minutes = Math.round((time % 1)*60)
+                    return hours + "h " + minutes + "min" 
                 }
                 return "-" //return the contents of the cell;
             }},

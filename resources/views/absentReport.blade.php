@@ -39,7 +39,13 @@
             {title:"Alguse kuupäev", field:"date_start", headerFilter:true},
             {title:"Lõpu kuupäev", field:"date_end", headerFilter:true},
             {title:"Vahetus", field:"shift", headerFilter:true},
-            {title:"Tunnid", field:"hours", headerFilter:true},
+            {title:"Tunnid", field:"hours", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
+                let time = cell.getValue();
+                if(time < 0.0001) return;
+                let hours = Math.floor(time);
+                let minutes = Math.round((time % 1)*60)
+                return hours + "h " + minutes + "min" 
+            }},
             {title:"Kood/Põhjus", field:"reason", headerFilter:true, formatter:function(cell, formatterParams, onRendered){
                 if(cell.getRow().getData().overtime === 1){
                     return cell.getValue();

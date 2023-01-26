@@ -14,3 +14,4 @@ if (! function_exists('is_day')) {
         return $date1 > $date2 && $date1 < $date3;
     }   
 }
+

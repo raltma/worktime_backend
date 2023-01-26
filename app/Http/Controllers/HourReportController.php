@@ -18,6 +18,7 @@ class HourReportController extends Controller
         if(isset($data['date'])) $reports = $reports->where('date_selected', $data['date']);
         //optional parameter for selecting department
         if(isset($data['department'])) $reports = $reports->where('department', '=', $data['department']);
+        if(isset($data['overtime'])) $reports = $reports->where('overtime', '=', $data['overtime']);
         return $reports->get();
       }
 
