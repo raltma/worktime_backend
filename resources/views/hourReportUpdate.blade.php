@@ -45,13 +45,33 @@
             </label>
         </div>
     </div>
+    <div>
+        <label>Osakond:</label>
+        <div>
+            <label>
+                Puudub
+                <input @if($report->department === "Puudub") checked @endif name="department" type="radio" value="Puudub">
+            </label>
+            <label>
+                Tekk
+                <input @if($report->department === "Tekk") checked @endif name="department" type="radio" value="Tekk">
+            </label>
+            <label>
+                Padi
+                <input @if($report->department === "Padi") checked @endif name="department" type="radio" value="Padi">
+            </label>
+        </div>
+    </div>
     <div>       
         <label>Tunnid:</label>
         <input name="hours" type="number" min=0 value="{{$report->hours}}">
     </div>
-    <div>
+    <div class="overtimeDiv">
         <label>Ületunnid:</label>
-        <input name="overtime" type="number" value="{{$report->overtime_hours}}">
+        <div>
+            <input name="overtime_hours" type="number" min=0 max=99 value="{{floor($report->overtime_hours)}}">h
+            <input name="overtime_minutes" type="number" min=0 max=59 value="{{round(($report->overtime_hours - floor($report->overtime_hours)) * 60 )}}">min
+        </div>
     </div>
     <div>
         <label>Kinnitatud:</label>

@@ -46,10 +46,12 @@ class HourReportController extends Controller
             }
             if(isset($input['date'])) $report->date_selected = $input['date'];
             if(isset($input['shift']))$report->shift = $input['shift'];
+            if(isset($input['department']))$report->department = $input['department'];
             if(isset($input['hours']))$report->hours = $input['hours'];
-            if(isset($input['overtime'])){
-                if($input['overtime']>0) $report->overtime = 1;
-                $report->overtime_hours = $input['overtime'];
+            $report->overtime = 0;
+            if(isset($input['overtime_hours'])){
+                if($input['overtime_hours'] > 0 || $input['overtime_minutes'] > 0) $report->overtime = 1;
+                $report->overtime_hours = $input['overtime_hours']+ $input['overtime_minutes']/60;
             }
             if(isset($input['confirmed'])){
                 if($report->confirmed !== 1){

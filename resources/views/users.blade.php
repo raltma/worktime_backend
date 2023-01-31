@@ -42,6 +42,10 @@
         </select>
     </div>
     <div>
+        <label>Automaatsed tunnid Biostarist:</label>
+        <input id="bs_auto" name="bs_auto" type="checkbox">
+    </div>
+    <div>
         <label>Admin:</label>
         <input id="admin" name="admin" type="checkbox">
     </div>
@@ -52,6 +56,7 @@
         @endforeach
         </select>
     </section>
+    
     <section>
         <input class="submitButton"  id="saveButton" type="submit" value="Salvesta">
         <button type="button" onclick="clearForm()">Tühista valik</button>
@@ -102,6 +107,7 @@
                     }
                 }
             },
+            {title:"Bs automaatika", field:"bs_auto", formatter:"tickCross",width:125, headerFilter:true},
             {title:"Admin", field:"admin", formatter:"tickCross",width:125, headerFilter:true},
             {title:"Admini osakonnad", field:"adminDepartments", headerFilter:true}
         ]
@@ -114,6 +120,7 @@
         document.getElementById('userForm').style.display = "block";
         document.getElementById('selectedUserText').innerHTML = `Valitud on kasutaja <i><b>${rowData.name}<b></i>`
         document.getElementById('admin').checked = rowData.admin === 1
+        document.getElementById('bs_auto').checked = rowData.bs_auto === 1
         document.getElementById('default_tab').value = rowData.default_tab
         adminDepartmentContainer.hidden = true
         if(rowData.admin === 1) adminDepartmentContainer.hidden = false 

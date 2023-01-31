@@ -36,6 +36,7 @@ class UserController extends Controller
             }
             
             $user->admin = isset($input['admin'])?1:0;
+            $user->bs_auto = isset($input['bs_auto'])?1:0;
             $user->save();
             return back()->withErrors(['message'=>"Kasutaja \"{$user['username']}\" muudetud"]);
         }

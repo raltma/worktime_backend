@@ -49,3 +49,11 @@ select{
         display: flex;
         gap: .5rem;
     }
+
+.overtimeDiv div{
+    display: flex;
+    gap: .25rem;
+}
+.overtimeDiv div input{
+    width: 3rem;
+}
