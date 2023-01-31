@@ -27,7 +27,7 @@
     </section>
     <div>
         <label>Kasutajanimi:</label>
-        <input id="username" required name="username" type="text">
+        <input id="username" name="username" type="text">
     </div>
     <div>
         <label>Parool:</label>
