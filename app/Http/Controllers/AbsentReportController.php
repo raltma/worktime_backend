@@ -55,12 +55,12 @@ class AbsentReportController extends Controller
             
             if(isset($input['user_id'])){
                 $report->user_id = $input['user_id'];
-                $report->biostar_check = "Pole tehtud";
             }
             if(isset($input['date_start'])) $report->date_start = $input['date_start'];
             if(isset($input['date_end'])) $report->date_end = $input['date_end'];
             if(isset($input['shift']))$report->shift = $input['shift'];
-            if(isset($input['hours']))$report->hours = $input['hours'];
+            if(isset($input['hours']))$report->hours = $input['hours']+ $input['minutes']/60;
+            
             if(isset($input['reason']))$report->reason = $input['reason'];
             $file = $request->file('file');
             if($file !== null){
