@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="overtimeDiv">
-        <label>Ületunnid:</label>
+        <label>Tunnid:</label>
         <div>
             <input name="hours" type="number" min=0 max=99 value="{{floor($report->hours)}}">h
             <input name="minutes" type="number" min=0 max=59 value="{{round(($report->hours - floor($report->hours)) * 60 )}}">min
