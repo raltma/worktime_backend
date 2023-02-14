@@ -137,5 +137,80 @@
                 "code": "Z"
             }
         ]
+    },
+    {
+        "header": "Puudumised",
+        "items": [
+            {
+                "name":"Põhjuseta puudumine",
+                "code": "z"
+            },
+            {
+                "name": "Osaliselt tasustatav",
+                "code": "O"
+            },
+            {
+                "name": "Õppekogunemine",
+                "code": "Õ"
+            },
+            {
+                "name": "Tasustatav vaba päev",
+                "code": "V"
+            }
+        ]
+    },
+    {
+        "header": "Muu",
+        "items": [
+            {
+                "name": "Tööluus",
+                "code": "Z"
+            }
+        ]
+    },
+    {
+        "header":"Haiguslehed",
+        "items": [
+            {
+                "name": "Haigestumine",
+                "code": "h1"
+            },
+            {
+                "name": "Haigestumine raseduse ajal",
+                "code": "h2"
+            },
+            {
+                "name": "Olmevigastus",
+                "code": "h3"
+            },
+            {
+                "name": "Tööõnnetus",
+                "code": "h4"
+            },
+            {
+                "name": "Karantiin",
+                "code": "h5"
+            },
+            {
+                "name": "Haige personaliliikme põetamine kodus",
+                "code": "h6"
+            },
+            {
+                "name": "Alla 3a lapse või alla 16a puudega lapse hooldamine kui..",
+                "code": "h7"
+            },
+            {
+                "name": "Alla 12a haige lapse või alla 19a puudega lapse...",
+                "code": "h8"
+            },
+            {
+                "name": "Üleviimine kergemale tööle",
+                "code": "h9"
+            },
+            {
+                "name": "Haigestumine või vigastus raseduse ajal(Tõendi alusel)",
+                "code": "h10"
+            }
+            ]
     }
 ]
