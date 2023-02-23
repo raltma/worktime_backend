@@ -72,8 +72,13 @@
             </optgroup>
         @endforeach
         </select>
+        </div>
     </div>
-    </div>
+     <div>
+        <label>Kommentaar:</label>
+        <div>
+            <textarea name="description">{{$report->description}}</textarea>
+        </div>
     <div>
         <label>Kinnitatud:</label>
         <input @if($report->confirmed === 1) checked @endif id="confirmed" name="confirmed" type="checkbox">

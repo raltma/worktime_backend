@@ -59,6 +59,7 @@
                 target:"_blank",
                 labelField:"filename"
             }},
+            {title:"Kommentaar", field:"description", formatter:"textarea", headerFilter:true},
             {title:"Kinnitatud",headerSort:false, field:"confirmed",width:175, headerFilter:"tickCross", formatter:function(cell, formatterParams, onRendered){
                 if(cell.getValue() === 0){
                     return `<form autocomplete="off" action="{{url('absentReport/confirm')}}" method="post">

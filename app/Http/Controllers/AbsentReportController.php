@@ -60,7 +60,7 @@ class AbsentReportController extends Controller
             if(isset($input['date_end'])) $report->date_end = $input['date_end'];
             if(isset($input['shift']))$report->shift = $input['shift'];
             if(isset($input['hours']))$report->hours = $input['hours']+ $input['minutes']/60;
-            
+            if(isset($input['description']))$report->description = $input['description'];
             if(isset($input['reason']))$report->reason = $input['reason'];
             $file = $request->file('file');
             if($file !== null){
@@ -142,6 +142,7 @@ class AbsentReportController extends Controller
           $report->reason = $request->reason;
           $report->user_id = $request->user_id;
           $report->hours = $request->hours;
+          if(isset($request->description))$report->description = $request->description;
           $file = $request->file('file');
           if($file !== null){
             $file_uploaded_path = $file->store("absentReport",'public');
