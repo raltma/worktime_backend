@@ -24,7 +24,6 @@
     let absentReasons = {{Js::from(json_decode(File::get(resource_path("json/absentReasons.json"))))}}
     absentReasons = absentReasons.map((d)=>d.items).flat(1)
     let tableData = {{ Js::from($reports) }};
-    console.log(tableData)
     let table = new Tabulator("#table", {
         data: tableData,
         layout: "fitColumns",
@@ -54,8 +53,17 @@
                 let name = absentReasons.find((x)=>x.code === cell.getValue()).name
                 return cell.getValue() + " / " + name //return the contents of the cell;
             }},
-            {title:"Manus", field:"filepath",  headerFilter:true, 
-                formatter:"link", formatterParams:{
+            {   title:"Manus", 
+                field:"filepath",  
+                headerFilter:true, 
+                formatter:"link",
+                cellClick: function(e, cell){
+                    if(e.stopPropagation){
+                        e.stopPropagation();
+                    }
+                e.stopPropagation();
+                }, 
+                formatterParams:{
                 target:"_blank",
                 labelField:"filename"
             }},
@@ -83,8 +91,10 @@
     })
 
     table.on("rowClick", function(e, row){
-        let rowData = row.getData()
-        window.location.href = "{{URL::to('absentReport/update')}}"+ "/"+ rowData.id
+        if(e.target.classList.contains("tabulator-cell")){
+            let rowData = row.getData()
+            window.location.href = "{{URL::to('absentReport/update')}}"+ "/"+ rowData.id    
+        }
     });
 </script>
 @endsection
